@@ -1,134 +1,70 @@
-# Intelligent Algorithmic Trading System (Quantitative + ML Framework)
+# Machine Learning Algorithmic Trading System
 
-**Author:** [Your Name]  
-**Education:** Self-directed study with advanced coursework from MIT and Harvard  
-**Technologies:** Python, PyTorch (CUDA), Pandas, NumPy, XGBoost, Joblib, Alpaca API, Yahoo Finance, Vector Databases, Bloomberg API (in progress)
+### Overview
+This project is a fully custom-built algorithmic trading application designed and developed independently while completing advanced coursework through MITx and HarvardX.  
+It combines real-time data ingestion, machine learning–based decision-making, and built-in risk management to operate autonomously across multiple markets.  
 
----
-
-## 📊 Overview
-
-This project documents a **fully self-built quantitative trading and research system** that combines **machine learning, statistical modeling, and automated execution** across multiple markets.  
-The system was designed to **analyze, predict, and trade financial instruments autonomously**, while learning continuously from live and historical data.
-
-Over a **four-month live test**, the system achieved a **12.2% ROI with a 56% win rate**, executing trades through the Alpaca API using real market data.  
-The application featured **automated trading, portfolio risk management, multi-model signal validation, and adaptive learning loops** — all developed independently while completing MIT and Harvard online coursework in quantitative methods, machine learning, and computational systems.
+The system achieved a **12.2% ROI with a 56% win rate** over four months of live paper trading.  
+It includes a complete framework for both **automated trading** and **data-driven decision support**, offering the flexibility to run as a self-managed trading agent or as a manual trading interface with integrated analytics.
 
 ---
 
-## 🧠 Continuous Learning and Market Adaptation
-
-Outside of active market sessions, the system entered a **continuous-learning mode**.  
-During this time, it processed post-market data, recalculated rolling features, and fine-tuned model parameters based on recent **regime behavior** — including volatility shifts, liquidity changes, and sector rotation trends.  
-This asynchronous training loop minimized model drift and ensured all predictive components were recalibrated before each market open.  
-It also dynamically adjusted signal thresholds and **volatility-based position sizing** to maintain capital efficiency during changing market conditions.
-
----
-
-## ⚙️ System Architecture
-
-The framework was structured into four primary layers for modularity, speed, and control:
-
-### 1. Data Layer
-- Live and historical market data from **Yahoo Finance** and **Alpaca**, with partial **Bloomberg API** integration.  
-- Normalized multi-market inputs with synchronized timestamps to avoid misalignment between asset classes.  
-- Implemented feature generation for momentum, volume pressure, volatility bands, VWAP deviation, and trend correlation.  
-- Stored embeddings in **vector databases** for historical condition matching and pattern recall.
-
-### 2. Modeling Layer
-- **Temporal Fusion Transformers (TFT)** for multi-horizon forecasting and market regime tracking.  
-- **XGBoost** ensemble models for short-term directional prediction and volatility classification.  
-- Model persistence and fast recall through **Joblib**.  
-- Confidence-weighted ensemble logic that automatically prioritized higher-confidence models based on live volatility and data reliability.  
-
-### 3. Execution Layer
-- Integrated directly with **Alpaca’s API** for live order routing and account management.  
-- Supported **single-market** or **multi-market execution**, with internal throttling for rate-limited APIs.  
-- Conducted pre-trade validation (exposure, margin, spread, liquidity) and post-trade audit logging (execution time, fill quality, latency).  
-- Operated in three selectable modes:
-  - **Autonomous trading:** fully automated execution  
-  - **Assisted trading:** requires confirmation  
-  - **Research/backtesting:** simulation only  
-
-### 4. Risk and Capital Management
-- Dynamically adjusted **risk exposure** and **position size** based on rolling volatility and capital utilization.  
-- Implemented **drawdown limits**, **exposure caps**, and **auto-shutdown** safeguards.  
-- Real-time exposure tracking across correlated instruments to prevent over-leveraging.  
-- Time-based halts before major economic events, news releases, or low-liquidity sessions.  
+### Core Features
+- **Multi-Market Trading:** Supports simultaneous trading across multiple markets and asset classes.  
+- **Machine Learning Integration:** Utilizes PyTorch, XGBoost, and TFT architectures for adaptive prediction and signal generation.  
+- **Risk Management Engine:** Built-in configurable safeguards and position-sizing controls that adapt to market volatility.  
+- **Asynchronous Continuous Learning:**  
+  Outside active market sessions, the system entered a continuous-learning phase.  
+  During this time, it ingested post-market data, recomputed rolling features, and fine-tuned model parameters against the most recent regime conditions.  
+  This asynchronous training loop helped minimize performance decay caused by data drift and ensured that models were recalibrated before the next market open.  
+  This process also included adaptive threshold updates for signal confidence and volatility-based position sizing recalibration.
+- **Custom Paper Trader:** A built-in paper trading module used for model training, backtesting, and off-hour parameter tuning.  
+- **News & Data Fusion:** Integrated financial news sentiment and historical data analysis to identify trade opportunities and generate alerts.  
+- **Performance & Latency Optimization:** Designed for low-latency execution using CUDA acceleration and vectorized operations.  
 
 ---
 
-## 📈 Machine Learning and Quantitative Methods
-
-- **Framework:** PyTorch with CUDA acceleration.  
-- **Training Data:** Combined OHLCV data, technical indicators, sentiment signals, and event-based features.  
-- **Models:** Temporal Fusion Transformers (for trend and context learning) and XGBoost (for directional classification).  
-- **Metrics:** Sharpe ratio, Sortino ratio, drawdown, profit factor, hit rate, and precision-recall balance.  
-- **Adaptive Training:** The system retrained nightly with fresh data to account for market drift, regime changes, and volatility clustering.  
-
----
-
-## 💡 Core Features
-
-- **Continuous Off-Hours Learning:** Automatically retrains and optimizes models during closed-market hours.  
-- **Market-Aware Execution:** Trades adapted to session times, liquidity conditions, and volatility spikes.  
-- **Multi-Asset Support:** Operated across equities, crypto, and forex.  
-- **Dynamic Risk Management:** Volatility-adjusted position sizing and live exposure control.  
-- **Capital Efficiency:** Intelligent scaling to prevent drawdown while maintaining exposure to outperforming sectors.  
-- **Event Logging:** Full traceability of every model inference, trade decision, and system action.  
-- **Alerting System:** News-driven watchlists and predictive movement signals.  
-- **Fail-Safe Logic:** Automatic pause on network errors, excessive volatility, or strategy divergence.
+### Technical Highlights
+- **Languages & Frameworks:** Python, PyTorch, Pandas, NumPy, Joblib, XGBoost, and Alpaca API.  
+- **Data Handling:** Efficient use of rolling datasets, historical caching, and on-the-fly normalization to optimize model input pipelines.  
+- **APIs & Data Sources:** Integrated Alpaca and Yahoo Finance, with partial Bloomberg API integration in progress.  
+- **GPU Acceleration:** Configured for multi-GPU use with CUDA optimization for training and inference workloads.  
+- **Fail-Safes:** Included stop-loss, trade validation layers, and configurable capital exposure limits.  
+- **System Architecture:** Modular design with isolated data, model, and execution pipelines for stability and scalability.  
 
 ---
 
-## 🧩 Design Philosophy
-
-1. **Precision:** Every component optimized for sub-millisecond latency during trade routing.  
-2. **Resilience:** Failsafe systems and drawdown triggers protect against market shocks.  
-3. **Transparency:** Every execution and model decision is auditable.  
-4. **Efficiency:** Designed to maximize computational output without additional hardware.  
-5. **Modularity:** Each layer can be independently replaced or upgraded.  
-6. **Security:** All API keys, data feeds, and user operations encrypted and sandboxed.
+### Market Knowledge Integration
+The system incorporates market session logic, volatility-based position scaling, and dynamic exposure control depending on liquidity and price action patterns.  
+It factors in market open/close times, pre/post-market conditions, and macro-driven volatility shifts.  
+Signal generation was influenced by both price momentum and volume correlation patterns, rather than relying on static thresholds.  
 
 ---
 
-## 🔒 Why the Full Code Isn’t Public
-
-Due to a **hardware failure**, portions of the original system code and GUI were lost.  
-Additionally, parts of the algorithm, data handling, and trading logic are withheld for **security and proprietary reasons**, as they may be used in future redevelopment.  
-This repository serves as a **technical reference and design documentation**, with selected snippets and architecture visuals for verification.
-
----
-
-## 🚀 Planned Improvements
-
-The next major iteration will include:
-
-- Completion of **Bloomberg API** integration for higher-quality data.  
-- Enhanced **GPU utilization and inference optimization** for large-scale parallel processing.  
-- **Cluster-based performance balancing** for distributed trading operations.  
-- Improved **large-data throughput** for higher-volume multi-market operation.  
-- Microsecond-level **interaction logging** for all system and user actions.  
-- Deep optimization for **ultra-low latency** without hardware upgrades.  
-- Rebuilt **GUI** — faster, fully customizable, and more intuitive.  
-- Expanded **security layer** to protect both local and cloud-based operations.
+### Future Development
+Planned improvements include:
+- Completing Bloomberg API integration for higher-quality financial data access.  
+- Enhanced GPU support for model training and inference optimization.  
+- Performance balancing for multi-node or cluster deployments.  
+- Expanded large-data handling for higher-frequency and multi-market scaling.  
+- Microsecond-level interaction logging for both user actions and ML decisions.  
+- Major performance optimizations for lower latency and higher throughput without hardware upgrades.  
+- Redesigned, modular, and customizable GUI for a more intuitive user experience.  
+- Expanded security layer for data protection, access control, and model integrity.  
 
 ---
 
-## 🎯 Why This Project Matters
-
-This project reflects my practical understanding of how markets behave — from intraday liquidity shifts to volatility clustering and regime transitions.  
-It demonstrates experience not just in data science, but in **real-world market mechanics**, **execution infrastructure**, and **risk-adjusted capital deployment**.  
-It represents the foundation of a future production-level quantitative framework capable of adapting to changing conditions, managing exposure intelligently, and continuously improving through feedback.
+### Repository Information
+The full source code is not publicly available due to partial data loss and protection of proprietary logic developed during testing.  
+Select snippets and architecture screenshots are provided to demonstrate implementation depth, structure, and technical proficiency.
 
 ---
 
-## 📬 Contact
-
-**Email:** [your_email@domain.com]  
-**LinkedIn:** [Your LinkedIn Profile]  
+### Acknowledgments
+Built independently as part of self-directed quantitative research and development while completing advanced coursework through MITx and HarvardX.  
+This repository serves as a reference for employers and collaborators interested in quantitative systems, ML-based trading, and performance optimization.
 
 ---
 
-> *“Markets aren’t random — they’re complex systems driven by liquidity, behavior, and timing.  
-> The advantage lies in measuring those dynamics faster and reacting before everyone else.”*
+### Contact
+If you’re interested in discussing quant development, ML modeling, or system architecture, feel free to reach out directly via LinkedIn or through GitHub.
