@@ -1,119 +1,138 @@
-# 🧠 Algorithmic Trading & Machine Learning System
+# Algorithmic Trading and Machine Learning System
 
-**Creator:** [Your Name]  
-**Languages & Tools:** Python, PyTorch, CUDA, Pandas, NumPy, scikit-learn, XGBoost, Joblib, Alpaca API, Yahoo Finance, Vector Databases, Bloomberg API (integration in progress)  
-**Focus:** Quantitative trading automation, predictive modeling, market research, and intelligent portfolio management.  
-
----
-
-## 🚀 Overview
-
-This repository documents my **end-to-end algorithmic trading system**, originally built as a standalone desktop application — not a web interface.  
-It combines **quantitative research, predictive modeling, and automated execution** into a unified framework capable of handling **multiple markets simultaneously**.
-
-> ⚠️ **Note:** Due to data loss from a drive failure, the **full production code and datasets are not available.**  
-However, I’ve included **code snippets, architectural overviews, and visual references** to demonstrate the system’s structure, methodology, and technical depth.  
-This repository serves as a **technical showcase** of my work and approach — not a functional release.
+**Author:** [Your Name]  
+**Technologies:** Python, PyTorch (CUDA), Pandas, NumPy, XGBoost, Joblib, Alpaca API, Yahoo Finance, Vector Databases, Bloomberg API (integration planned)
 
 ---
 
-## 💡 Project Motivation
+## Overview
 
-This project was a personal passion and professional growth challenge — developed **independently while taking advanced courses at MIT and Harvard** in machine learning, quantitative methods, and data systems engineering.
+This repository documents the development of a **standalone trading and research application** I built from scratch.  
+It was designed to perform **automated trading, predictive modeling, and quantitative analysis** across multiple markets — equities, crypto, and forex — using both rule-based logic and machine learning models.
 
-The goal was to design a **fully autonomous trading system** that could:
-- Perform **real-time market data analysis** and signal generation  
-- Manage **risk dynamically** based on customizable parameters  
-- **Adapt** its algorithmic strategy based on performance and volatility  
-- Execute trades through secure APIs with **failsafes** and **capital protection mechanisms**
-
----
-
-## 🧩 System Architecture
-
-The system was designed around **modularity**, **speed**, and **fault tolerance**.  
-Here’s a high-level breakdown:
-
-### 🔹 Core Components
-- **Data Layer:** Historical and live data ingestion from Yahoo Finance, Alpaca, and Bloomberg APIs  
-- **Preprocessing:** Cleaning, normalization, and feature engineering using Pandas & NumPy  
-- **Modeling:**  
-  - Temporal Fusion Transformers (TFT) for time series forecasting  
-  - XGBoost and ensemble models for trend classification  
-  - Neural networks (PyTorch, CUDA-accelerated) for deep pattern recognition  
-- **Execution Engine:**  
-  - Alpaca API for trade execution  
-  - Multi-market trading capability (stocks, forex, crypto, futures)  
-  - Rule-based and learned strategy selection  
-- **Risk Management:**  
-  - Configurable risk ratios  
-  - Stop-loss, trailing stops, and volatility-based position sizing  
-- **Prediction & Alerts:**  
-  - Market open/close timers and alerts  
-  - Predictive model for price movement likelihood (up/down)  
-  - Historical pattern recognition for event-driven triggers
+> **Note:** The original production code and datasets are not included.  
+> A hardware failure led to the loss of critical files, so this repository serves as a technical record, showing snippets, logic outlines, and architectural design.  
+> The intent is to document the system’s structure and methods, not to release an active trading platform.
 
 ---
 
-## 🧠 Machine Learning Stack
+## Motivation and Context
 
-- **Framework:** PyTorch (GPU-accelerated via CUDA)
-- **Training:** Custom dataset generator from live + historical data  
-- **Models Used:**  
-  - Temporal Fusion Transformer (TFT)  
-  - Gradient Boosted Trees (XGBoost)  
-  - Ensemble blending for improved signal reliability  
-- **Vector Databases:** Used for storing embedding vectors and similar pattern queries for quick recall  
-- **Joblib Serialization:** Efficient saving/loading of trained models for real-time inference  
+This system was built independently while I was taking advanced coursework at **MIT** and **Harvard** to strengthen my quantitative, data science, and systems engineering background.  
+The goal was to design a framework that could **analyze live data, predict directional movements, and execute trades** with proper **risk management** and **capital preservation logic** — all without manual input.
 
----
-
-## 📊 Key Features
-
-- 🧩 **Adaptive Trading Algorithms:** Automatically selects the most effective model for each market condition  
-- ⚙️ **Configurable Risk Controls:** Adjustable risk ratios, position sizing, and capital exposure  
-- 📈 **Market-Aware Scheduling:** Executes trades and predictions based on live global market timings  
-- 🧮 **Multi-Asset Trading:** Stocks, crypto, and forex supported simultaneously  
-- 🛡️ **Failsafe Protection:** Recovery layers and circuit breakers for volatility and connection issues  
-- 🧰 **Research Mode:** Can operate as a manual trading UI with data visualization and analytic tools  
+The project was structured around real-world trading constraints:
+- Market hours, liquidity windows, and time zone alignment
+- Order routing delays and API latency
+- Capital allocation across correlated and non-correlated instruments
+- Automated risk adjustment based on volatility and drawdown limits
 
 ---
 
-## 🖼️ Visuals & Snippets
+## System Structure
 
-> *(Add your screenshots, graphs, or code snippets here)*  
-> Suggested sections:
-> - Dashboard / GUI overview  
-> - Model training progress graph  
-> - Risk management logic sample  
-> - Example prediction output  
+The application was divided into four major layers:
+
+### 1. Data Layer
+- Pulled live and historical data from **Yahoo Finance** and **Alpaca**, with planned support for **Bloomberg API**.  
+- Handled real-time stream updates, data normalization, and storage into **vector databases** for quick historical pattern matching.  
+- Engineered technical features: moving averages, volume-weighted price action, volatility bands, and momentum ratios.  
+
+### 2. Modeling Layer
+- Used **Temporal Fusion Transformers (TFT)** for time-series prediction and **XGBoost** for trend classification.  
+- Incorporated a hybrid model ensemble to cross-verify predicted movements.  
+- Models were trained and serialized using **Joblib** for fast loading during live sessions.  
+- Implemented a **confidence weighting system**: when predictions conflicted, execution depended on model reliability and market volatility.
+
+### 3. Execution Layer
+- Used **Alpaca’s API** for trade execution.  
+- Supported simultaneous operation across multiple markets.  
+- Contained pre-trade checks (available margin, exposure limits) and post-trade validation (confirmation, slippage logging).  
+- Execution routing was designed to minimize latency and API rate-limit issues.  
+- Included configurable modes:
+  - **Automated trading** (fully autonomous)
+  - **Assisted trading** (user confirmation before execution)
+  - **Research mode** (no live trades, simulation only)
+
+### 4. Risk and Capital Management
+- Implemented adjustable **risk ratios** based on account equity.  
+- Used rolling volatility measures (ATR and variance tracking) to scale position sizes.  
+- Stop-loss and trailing stop parameters were dynamically calculated.  
+- Built a fail-safe system to stop trading after a defined drawdown or connectivity issue.  
+- Used time-based shutdown logic before major news events or at session end to avoid after-hours volatility.
 
 ---
 
-## 🔍 Why This Repository Exists
+## Machine Learning and Quant Methods
 
-While the original project code is no longer fully intact, this repository stands as:
-1. A **technical record** of my engineering and quantitative methods  
-2. A **demonstration of capability** in designing, training, and deploying complex ML-driven trading systems  
-3. A **foundation** for future redevelopment — potentially as an open-source quant framework or startup platform  
-
-This project represents the culmination of **self-directed research**, **hands-on experimentation**, and **academic training** across data science, quantitative finance, and applied machine learning.
-
----
-
-## 🧭 Vision & Next Steps
-
-I plan to rebuild a next-generation version of this system from the ground up — leveraging:
-- More advanced transformer architectures (possibly LLMs fine-tuned for market context)
-- Real-time distributed computation  
-- Adaptive learning pipelines that continuously refine trading behavior  
-- Code efficency for faster computation time with less recourses
-- 
-If you’re a quant firm, startup, or research lab interested in **collaboration or evaluation**, feel free to reach out — I’m open to discussions, insights, and opportunities.
+- **Framework:** PyTorch with CUDA acceleration for model training and inference.  
+- **Data:** Historical OHLCV data combined with technical indicators and calendar-based features (market open/close, weekdays, earnings days).  
+- **Models:**  
+  - **TFT (Temporal Fusion Transformer)** for long-range dependencies in price movement  
+  - **XGBoost** for short-term directional prediction  
+  - Ensemble averaging for stability across instruments  
+- **Evaluation:**  
+  - Custom validation metric combining accuracy, profit factor, and drawdown ratio  
+  - Backtesting framework to simulate trades before deployment  
+- **Vector Search:** Used embedding comparisons for historical similarity queries (“find past conditions that match the current state”)  
 
 ---
 
-## 📫 Contact
+## Core Features
+
+- **Multi-Market Operation:** Supports equities, forex, and crypto with separate strategy pipelines.  
+- **Time-Aware Trading:** System pauses or closes trades around market open/close and known high-volatility windows.  
+- **Adaptive Algorithms:** System dynamically switches between models or disables trading when uncertainty exceeds thresholds.  
+- **Capital Efficiency:** Positions are sized to preserve capital and maintain balanced exposure.  
+- **Custom Risk Profiles:** Risk and position parameters could be adjusted per asset or per market.  
+- **Event Logging:** All trade decisions, data fetches, and model inferences logged to local storage for review.
+
+---
+
+## Example Components
+
+> *(Snippets and screenshots can be added here.)*  
+> Suggested content:
+> - Example signal-generation function  
+> - Model ensemble decision logic  
+> - GUI elements (portfolio view, trade monitor, alerts)  
+> - Example trade summary output  
+
+---
+
+## Design Principles
+
+1. **Transparency:** Every trade decision could be traced back to data and model reasoning.  
+2. **Safety First:** All automation functions had risk caps and override switches.  
+3. **Scalability:** Designed to handle multiple accounts and markets with minimal performance loss.  
+4. **Low Latency:** Execution functions were written to reduce overhead and response times.  
+5. **Extensibility:** Modular design allows new data feeds or algorithms to be plugged in easily.
+
+---
+
+## Why the Repository Exists
+
+This project reflects my personal approach to quantitative research, systems design, and applied machine learning.  
+Although the original files were partially lost, the concepts, structure, and technical methods documented here show:
+- Real understanding of trading system architecture  
+- Experience with financial data engineering and predictive modeling  
+- Awareness of how ML interacts with real market structure, latency, and risk management  
+- Ability to design and maintain complex, reliable software independently
+
+---
+
+## Next Steps
+
+I plan to rebuild the system using more efficient architectures:
+- Transformer-based hybrid models with online learning capability  
+- Real-time inference pipelines using GPU batching  
+- Expanded market data coverage and automatic regime detection  
+
+The long-term goal is to evolve this project into a **modular trading and research framework** that could adapt to different strategies and data sources in real time.
+
+---
+
+## Contact
 
 **Email:** [your_email@domain.com]  
 **LinkedIn:** [Your LinkedIn Profile]  
@@ -121,6 +140,5 @@ If you’re a quant firm, startup, or research lab interested in **collaboration
 
 ---
 
-> *“Markets are algorithms written by human emotion.  
-Understanding them means teaching a machine to see both logic and chaos — simultaneously.”*  
-— *[Your Name]*
+> *“Markets are not random — they are structured chaos.  
+> The goal isn’t to predict perfectly, but to measure uncertainty better than others.”*
